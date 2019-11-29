@@ -1,8 +1,17 @@
 const request = require('request');
-const keys = require('../../config/keys');
+const fs = require("fs");
+const path = require("path");
+if (fs.existsSync(path.join(__dirname, "../../config"))) {
+    const keys = require('../../config/keys');
+    var key = keys.darkSky.KEY;
+} else {
+    var key = process.env.darksky_key;
+}
+
+
 
 const forecast = (latitude, longitude, callback) => {
-    const url = `https://api.darksky.net/forecast/${keys.darkSky.KEY}/${latitude},${longitude}`;
+    const url = `https://api.darksky.net/forecast/${key}/${latitude},${longitude}`;
     request({url, json: true}, (error, {body}) => {
         if (error) {
             callback('Unable to connect to forecast service', undefined);

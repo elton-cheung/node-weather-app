@@ -1,8 +1,17 @@
 const request = require('request');
-const keys = require('../../config/keys');
+const fs = require("fs");
+const path = require("path");
+if (fs.existsSync(path.join(__dirname, "../../config"))) {
+    const keys = require('../../config/keys');
+    var key = keys.mapbox.KEY;
+} else {
+    console.log('well yikes');
+    var key = process.env.mapbox_key;
+}
+
 
 const geocode = (address, callback) => {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${keys.mapbox.KEY}`;
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${key}`;
     request({url, json: true}, (error, {body}) => {
         if (error) {
             callback('Unable to connect to location services!', undefined);
