@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3000;
 const hbs = require('hbs');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
@@ -15,11 +16,6 @@ const partialsPath = path.join(__dirname, '../templates/partials');
 app.set('views', viewsPath);
 app.set('view engine', 'hbs');
 hbs.registerPartials(partialsPath);
-
-// listen to port 3000
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.');
-});
 
 // supported routes
 app.get('', (req, res) => {
@@ -86,6 +82,11 @@ app.get('*', (req, res) => {
         name: 'Elton',
         message: 'Page not found.'
     })
+});
+
+// listen to port
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}.`);
 });
 
 
