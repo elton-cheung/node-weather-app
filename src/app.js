@@ -25,22 +25,22 @@ app.listen(3000, () => {
 app.get('', (req, res) => {
     res.render('index',{
         title: 'Weather',
-        name: 'Elton Cheung'
+        name: 'Elton'
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about',{
         title: 'About',
-        name: 'Elton Cheung'
+        name: 'Elton'
     });
 });
 
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
-        text: 'Welcome to the help page! U guh?',
-        name: 'Elton Cheung'
+        text: 'Welcome to the help page!',
+        name: 'Elton'
     })
 });
 
@@ -71,22 +71,10 @@ app.get('/weather', (req, res) => {
     })
 });
 
-app.get('/products', (req, res) => {
-    if (!req.query.search) {
-        res.send({
-            error: 'You must provide a search term.'
-        })
-    } else {
-        res.send({
-            products: []
-        })
-    }
-});
-
 app.get('/help/*', (req, res) => {
     res.render('error', {
         title: '404',
-        name: 'Elton Cheung',
+        name: 'Elton',
         message: 'Help article not found.'
     })
 });
@@ -95,7 +83,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('error', {
         title: '404',
-        name: 'Elton Cheung',
+        name: 'Elton',
         message: 'Page not found.'
     })
 });
